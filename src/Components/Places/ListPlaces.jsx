@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { post } from '../../actions/api'
 import styled from 'styled-components'
 import delete_icon from '../../assets/delete_icon.png'
-const ListPlaces = ({ apiUrl }) => {
+const ListPlaces = ({ apiUrl,flag }) => {
     // const [places, setPlaces] = useState([])
     const [list, setList] = useState([])
 
@@ -15,6 +15,9 @@ const ListPlaces = ({ apiUrl }) => {
             setList(res.data)
         })
     }
+    useEffect(() => {
+        getList()
+    }, [flag])
     useEffect(() => {
        getList()
     }, [])

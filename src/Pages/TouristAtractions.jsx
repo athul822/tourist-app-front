@@ -28,7 +28,7 @@ const TouristAtractions = () => {
   const [selectedDistrict, setSelectedDistrict] = useState(null);
   const [data, setData] = useState({})
   const [base64Image, setBase64Image] = useState(null);
-
+  const [flag, setFlag] = useState(false);
   const handleDistrictChange = (e) => {
     setSelectedDistrict(e.target.value);
     // Do something with the selected district
@@ -46,6 +46,7 @@ const TouristAtractions = () => {
     console.log("data", data);
     post('/places/register', data).then(res => {
       console.log(res);
+      setFlag(!flag)
       reset()
       // alert("Place added successfully")
     }).catch(err => {
@@ -116,7 +117,7 @@ const TouristAtractions = () => {
         </FormContainerInner>
       </FormContainer>
       <ListContainer>
-        <ListPlaces apiUrl={'places'} />
+        <ListPlaces apiUrl={'places'} flag={flag} />
       </ListContainer>
     </MainContainer>
   )

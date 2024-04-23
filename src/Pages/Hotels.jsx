@@ -32,6 +32,7 @@ const Hotels = () => {
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [data, setData] = useState({})
   const [base64Image, setBase64Image] = useState(null);
+  const [flag, setFlag] = useState(false);
 
   useEffect(() => {
     console.log(selectedDistrict);
@@ -52,6 +53,12 @@ const Hotels = () => {
     setSelectedPlace(e.target.value);
     // Do something with the selected district
   };
+  const reset = () => {
+    setData({});
+    setBase64Image(null);
+    setSelectedDistrict(null);
+    selectedPlace(null)
+  }
 
   const handleSubmit = () => {
     data.districtId = selectedDistrict;
@@ -60,7 +67,8 @@ const Hotels = () => {
     console.log("data", data);
     post('/hotels/register', data).then(res => {
       console.log(res);
-      alert("hotel added successfully")
+      setFlag(!flag)
+      reset()
     }).catch(err => {
       console.log(err);
     })
@@ -138,7 +146,7 @@ const Hotels = () => {
         </FormContainerInner>
       </FormContainer>
       <ListContainer>
-        <ListPlaces apiUrl={'hotels'} />
+        <ListPlaces apiUrl={'hotels'} flag={flag}/>
       </ListContainer>
     </MainContainer>
   )

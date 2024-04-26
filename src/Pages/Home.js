@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { get, post } from '../actions/api'
 import styled from 'styled-components'
 import DistrictDropdown from '../Components/DistictDopDown';
+import HomeCads from '../Components/HomeCads';
 const disticts = [
   { "name": "Thiruvananthapuram", "id": 0 },
   { "name": "Kollam", "id": 1 },
@@ -21,14 +22,6 @@ const disticts = [
 function Home() {
   const [districts, setDistricts] = useState(disticts);
   const [selectedDistrict, setSelectedDistrict] = useState(null);
-
-  useEffect(() => {
-    post('/hotels/list', {
-      "hotelType": "all"
-    }).then(res => {
-      console.log(res)
-    })
-  }, [])
   const handleDistrictChange = (e) => {
     setSelectedDistrict(e.target.value);
     // Do something with the selected district
@@ -36,15 +29,10 @@ function Home() {
 
   return (
     <MainContainer>
-     <div>
-        <label htmlFor="district">Select a District:</label>
-        {/* Use the DistrictDropdown component */}
-        <DistrictDropdown
-          districts={districts}
-          onChange={handleDistrictChange}
-          selectedDistrict={selectedDistrict}
-        />
-      </div>
+      <h2 style={{ marginTop:0 }}>Recent Places</h2>
+      <HomeCads url={'places'}/>
+      <h2>Recent Hotels</h2>
+      <HomeCads url={'hotels'}/>
     </MainContainer>
   )
 }
@@ -53,6 +41,7 @@ export default Home
 
 const MainContainer = styled.div`
   display: flex;
-  background-color:#f5c0f599;
   flex-direction: column;
 `;
+
+

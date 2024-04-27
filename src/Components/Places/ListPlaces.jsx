@@ -5,6 +5,7 @@ import delete_icon from '../../assets/delete_icon.png'; // Icon for delete butto
 import CircularLoading from '../CircularLoading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { secondary } from '../../utils/theme';
 
 const ListPlaces = ({ api, flag }) => {
   console.log(api, flag, "listPlaces");
@@ -61,7 +62,7 @@ const ListPlaces = ({ api, flag }) => {
             </InsideContainer1>
             <InsideContainer2>
               <InsideContainer3>
-                <p style={{ color: '#5e72e4', paddingTop: ".2em" }}>{item.name}</p>
+                <p style={{ color: secondary, paddingTop: ".2em" }}>{item.name}</p>
                 <Description>
                   <p style={{ fontSize: "12px" }}>{item.description}</p> {/* Place description */}
                 </Description>
@@ -101,7 +102,7 @@ const Description = styled.div`
 const CadContainer = styled.div`
   display: flex;
   gap: 0.8em;
-  box-shadow: 0 0 5px #5e72e4;
+  box-shadow: 0 0 5px ${secondary};
   border-radius: 10px;
 `;
 

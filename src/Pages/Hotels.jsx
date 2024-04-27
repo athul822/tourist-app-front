@@ -7,6 +7,7 @@ import { post } from '../actions/api';
 import PlacesDropDown from '../Components/PlacesDropDown';
 import DistrictDropdown from '../Components/DistictDopDown';
 import ListHotels from '../Components/Places/ListHotels';
+import { secondary } from '../utils/theme';
 
 // Sample list of districts
 const districts = [
@@ -143,7 +144,7 @@ const TouristAttractions = () => {
           )}
           <div style={{ display: 'flex', gap: '1em', width: '100%' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
-              <p style={{ color: '#5e72e4' }}>District*</p>
+              <p style={{ color: secondary }}>District*</p>
               <DistrictDropdown
                 districts={districts}
                 onChange={handleDistrictChange}
@@ -151,7 +152,7 @@ const TouristAttractions = () => {
               />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
-              <p style={{ color: '#5e72e4' }}>Place*</p>
+              <p style={{ color: secondary }}>Place*</p>
               <PlacesDropDown
                 places={places}
                 onChange={(e) => setSelectedPlace(e.target.value)}
@@ -190,7 +191,7 @@ const TouristAttractions = () => {
             setData={(name, value) => setData({ ...data, [name]: value })}
           />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '.4em' }}>
-            <p style={{ color: '#5e72e4', marginBottom: '1em' }}>Pick Place Image*</p>
+            <p style={{ color: secondary, marginBottom: '1em' }}>Pick Place Image*</p>
             <ImagePicker
               base64Image={base64Image}
               setBase64Image={(base64String) => setBase64Image(base64String)}
@@ -219,7 +220,7 @@ const MainContainer = styled.div`
 const FormContainer = styled.div`
   flex: 1;
   background-color: white;
-  box-shadow: 0 0 5px #5e72e4;
+  box-shadow: 0 0 5px ${secondary};
   padding: 1em;
   border-radius: 10px;
   overflow-y: scroll;
@@ -235,7 +236,7 @@ const FormContainerInner = styled.div`
 const ListContainer = styled.div`
   flex: 1;
   background-color: white;
-  box-shadow: 0 0 5px #5e72e4;
+  box-shadow: 0 0 5px ${secondary};
   padding: 1em;
   border-radius: 10px;
   overflow-y: auto;
@@ -245,7 +246,7 @@ const SubmitButton = styled.button`
   width: 200px;
   padding: 0.5em;
   border: none;
-  background-color: #5e72e4;
+  background-color: ${secondary};
   color: white;
   border-radius: 10px;
   cursor: pointer;

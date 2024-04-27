@@ -5,6 +5,7 @@ import DistrictDropdown from '../Components/DistictDopDown';
 import ListPlaces from '../Components/Places/ListPlaces';
 import ImagePicker from '../Components/ImagePicker';
 import { post } from '../actions/api';
+import { secondary } from '../utils/theme';
 
 const disticts = [
   { "name": "Thiruvananthapuram", "id": 0 },
@@ -111,7 +112,7 @@ const TouristAtractions = () => {
             }}
           />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
-            <p style={{ color: '#5e72e4' }}>District</p>
+            <p style={{ color: secondary }}>District</p>
             <DistrictDropdown
               districts={disticts}
               onChange={handleDistrictChange}
@@ -167,7 +168,7 @@ const TouristAtractions = () => {
             }}
           />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '.4em' }}>
-            <p style={{ color: '#5e72e4', marginBottom: '1em' }}>Pick Place Image*</p>
+            <p style={{ color: secondary, marginBottom: '1em' }}>Pick Place Image*</p>
             <ImagePicker
               base64Image={base64Image}
               setBase64Image={(base64String) => {
@@ -202,7 +203,7 @@ const SubmitButton = styled.button`
   padding: .5em;
   border-radius: 10px;
   border: none;
-  background-color: #5e72e4;
+  background-color: ${secondary};
   color: white;
   cursor: pointer;
 `;
@@ -220,7 +221,7 @@ const FormContainer = styled.div`
   flex: 1;
   height: 92%;
   background-color: white;
-  box-shadow: 0 0 5px #5e72e4;
+  box-shadow: 0 0 5px ${secondary};
   padding: 1em;
   border-radius: 10px;
   overflow-y: scroll;
@@ -239,7 +240,7 @@ const FormContainerInner = styled.div`
 const ListContainer = styled.div`
   flex: 1;
   height: 92%;
-  box-shadow: 0 0 5px #5e72e4;
+  box-shadow: 0 0 5px ${secondary};
   padding: 1em;
   border-radius: 10px;
   overflow-y: scroll;

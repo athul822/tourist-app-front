@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { secondary } from '../utils/theme';
 
 // Custom button to replace the default file input
 const FileButton = styled.label`
-  background-color: #5e72e4; // Custom button background color
+  background-color: ${secondary}; // Custom button background color
   color: white; // Button text color
   padding: 4px 6px; // Padding for the button
   cursor: pointer; // Change cursor to pointer on hover

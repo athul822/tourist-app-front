@@ -1,11 +1,12 @@
 import React from 'react';
-import { Outlet } from 'react-router';
+import { Outlet,useNavigate } from 'react-router';
 import styled from 'styled-components';
 import SidebarItem from '../Components/SideBar/Sidebar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt,faHome,faMapMarkerAlt,faHotel} from '@fortawesome/free-solid-svg-icons';
-
+import { main, secondary } from '../utils/theme';
 function Layout() {
+  const navigate = useNavigate();
   const [selected, setSelected] = React.useState(0);
   const menu = [
     { id: 0, name: 'Home', link: '',icon: faHome },
@@ -15,6 +16,7 @@ function Layout() {
 
   const handleLogout = () => {
     localStorage.clear();
+    navigate('/');
     window.location.reload();
   }
   return (
@@ -53,7 +55,7 @@ const MainContainer = styled.div`
   /* Updated flex property */
   display: flex;
   height: 100vh;
-  background-color: #f8f9fe;
+  background-color: ${main};
  
 `;
 
@@ -61,7 +63,7 @@ const LogoutButton = styled.button`
   padding: .5em;
   border-radius: 10px;
   border: none;
-  background-color: #5e72e4;
+  background-color: ${secondary};
   color: white;
   cursor: pointer;
 `;
@@ -87,7 +89,7 @@ const MainContentContainer = styled.div`
 const TitleBar = styled.div`
   flex: 1;
 //   background-color: blue;
-  color: #5e72e4;
+  color: ${secondary};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -102,7 +104,7 @@ const OutletContainer = styled.div`
 
   /* Removed height property */
   overflow-y: auto; /* Added to enable scrolling if needed */
-  // box-shadow: 0 0 5px #5e72e4;
+  // box-shadow: 0 0 5px ${secondary};
   // margin: 10px;
   border-radius: 10px;
   padding: 10px;
@@ -111,7 +113,7 @@ const OutletContainer = styled.div`
 const SideBarTop = styled.div`
   flex: 1;
 //   background-color: blue;
-   color: #5e72e4;
+   color: ${secondary};
    display: flex;
    align-items: center;
    justify-content: center;

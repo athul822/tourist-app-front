@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import { secondary } from '../utils/theme';
 
 // Animation for spinning effect
 const spin = keyframes`
@@ -28,7 +29,7 @@ const LoadingOverlay = styled.div`
 // Circular spinner with animated spin
 const Spinner = styled.div`
   border: 8px solid #f3f3f3; // Light gray outer border
-  border-top: 8px solid #3498db; // Blue for spinning effect
+  border-top: 8px solid ${secondary}; // Blue for spinning effect
   border-radius: 50%; // Circular shape
   width: 60px; // Spinner size
   height: 60px;

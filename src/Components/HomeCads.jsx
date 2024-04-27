@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import { get } from '../actions/api';
 import CircularLoading from './CircularLoading';
+import { secondary } from '../utils/theme';
 
 const HomeCads = ({ url }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -38,10 +39,10 @@ const RecentContainer = styled.div`
   gap: 1em;
   width: 94%;
   overflow-y: scroll;
-  background-color: #5e72e4;
+  background-color: ${secondary};
   padding: .5em;
   border-radius: 10px;
-  box-shadow: 0 0 5px #5e72e4;
+  box-shadow: 0 0 5px ${secondary};
 
 `;
 const Overlay = styled.div`
@@ -56,7 +57,7 @@ const Overlay = styled.div`
   `
 const RecentCard = styled.div`
   background-color: white;
-  box-shadow: 0 0 5px #5e72e4;
+  box-shadow: 0 0 5px ${secondary};
   padding: 1em;
   border-radius: 10px;
   width: 180px;

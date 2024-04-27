@@ -189,7 +189,7 @@ const TouristAtractions = () => {
         </FormContainerInner>
       </FormContainer>
       <ListContainer>
-        <ListPlaces apiUrl={'places'} flag={flag} />
+        <ListPlaces api={'places'} flag={flag} />
       </ListContainer>
     </MainContainer>
   );

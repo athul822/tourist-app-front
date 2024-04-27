@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { get } from '../actions/api';
 import CircularLoading from './CircularLoading';
 
-const HomeCads = ({url}) => {
-const [isLoading, setIsLoading] = useState(false);
+const HomeCads = ({ url }) => {
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     setIsLoading(true);
     get(`/${url}/recent`).then(res => {
@@ -14,15 +14,20 @@ const [isLoading, setIsLoading] = useState(false);
     })
   }, [])
 
-    const [recent, setRecent] = useState([]);
+  const [recent, setRecent] = useState([]);
 
   return (
     <RecentContainer>
-        {isLoading && <CircularLoading />}
-        {
-          recent.map((item, index) => <RecentCard key={index} bg={item.image}>{item.name}</RecentCard>)
-        }
-      </RecentContainer>
+      {isLoading && <CircularLoading />}
+      {
+        recent.map((item, index) =>
+          <RecentCard key={index} bg={item.image}>
+            <p style={{ color: 'white',position: 'absolute',zIndex: '2',backgroundColor:'none' }}>{item.name}</p>
+            <Overlay />
+            
+          </RecentCard>)
+      }
+    </RecentContainer>
   )
 }
 
@@ -39,6 +44,16 @@ const RecentContainer = styled.div`
   box-shadow: 0 0 5px #5e72e4;
 
 `;
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.1); /* Adjust the alpha value for desired transparency */
+  z-index: 1; /* Ensure the overlay is above the card */
+  border-radius: 10px; /* Same border-radius as the card for consistency */
+  `
 const RecentCard = styled.div`
   background-color: white;
   box-shadow: 0 0 5px #5e72e4;

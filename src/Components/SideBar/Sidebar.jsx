@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router';
 import styled from 'styled-components'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const SidebarItem = ({item, selected, id, setSelectedMenu }) => {
     const nav = useNavigate()
@@ -13,6 +14,7 @@ const SidebarItem = ({item, selected, id, setSelectedMenu }) => {
     box-shadow: 0 0 5px #5e72e4;
     padding-left: 14px;
     cursor: pointer;
+   
     `;
     const nomalStyle = `
     padding: 10px;
@@ -20,7 +22,7 @@ const SidebarItem = ({item, selected, id, setSelectedMenu }) => {
     margin: 10px;
     border-radius: 10px;
     cursor: pointer;
-
+   
    
     `
     const SideBarButton = styled.div`
@@ -28,12 +30,15 @@ const SidebarItem = ({item, selected, id, setSelectedMenu }) => {
 
 `
     return (
+       
         <SideBarButton onClick={()=>{
             setSelectedMenu()
             nav(item.link)
             }}>
+             <FontAwesomeIcon icon={item.icon} />{'  '}
             {item.name}
         </SideBarButton>
+     
     )
 }
 

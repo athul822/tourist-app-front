@@ -2,30 +2,42 @@ import React from 'react';
 import { Outlet } from 'react-router';
 import styled from 'styled-components';
 import SidebarItem from '../Components/SideBar/Sidebar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignOutAlt,faHome,faMapMarkerAlt,faHotel} from '@fortawesome/free-solid-svg-icons';
 
 function Layout() {
-    const [selected, setSelected] = React.useState(0);
-    const menu = [
-        { id: 0, name: 'Home',link:'' },
-        { id: 1, name: 'Tourist Atractions',link:'tourist-atractions' },
-        { id: 2, name: 'Hotels',link:'hotels' },
-    ]
+  const [selected, setSelected] = React.useState(0);
+  const menu = [
+    { id: 0, name: 'Home', link: '',icon: faHome },
+    { id: 1, name: 'Tourist Atractions', link: 'tourist-atractions' ,icon: faMapMarkerAlt},
+    { id: 2, name: 'Hotels', link: 'hotels',icon: faHotel },
+  ]
+
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.reload();
+  }
   return (
     <MainContainer>
       <SideBar>
         <SideBarTop>
-        <h2>Tourist app</h2>
+          <h2>Tourist app</h2>
         </SideBarTop>
         <SideBarBottom>
-            {
-                menu.map((item, index) => <SidebarItem item={item} key={index} id={index} setSelectedMenu={() => setSelected(index)} selected={selected} />)
-            }
-          
+          {
+            menu.map((item, index) => <SidebarItem item={item} key={index} id={index} setSelectedMenu={() => setSelected(index)} selected={selected} />)
+          }
+
         </SideBarBottom>
       </SideBar>
       <MainContentContainer>
         <TitleBar>
-        <h2>{menu[selected].name}</h2>
+          <h2>{menu[selected].name}</h2>
+          <LogoutButton
+          onClick={handleLogout}
+          >
+            <FontAwesomeIcon icon={faSignOutAlt} /> Logout
+          </LogoutButton>
         </TitleBar>
         <OutletContainer>
           <Outlet />
@@ -43,6 +55,15 @@ const MainContainer = styled.div`
   height: 100vh;
   background-color: #f8f9fe;
  
+`;
+
+const LogoutButton = styled.button`
+  padding: .5em;
+  border-radius: 10px;
+  border: none;
+  background-color: #5e72e4;
+  color: white;
+  cursor: pointer;
 `;
 
 const SideBar = styled.div`
@@ -68,9 +89,11 @@ const TitleBar = styled.div`
 //   background-color: blue;
   color: #5e72e4;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   margin-left: 10px;
   border-radius: 10px;
+  padding-right: 10px;
 `;
 
 const OutletContainer = styled.div`

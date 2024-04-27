@@ -6,6 +6,7 @@ import ImagePicker from '../Components/ImagePicker';
 import { post } from '../actions/api';
 import PlacesDropDown from '../Components/PlacesDropDown';
 import DistrictDropdown from '../Components/DistictDopDown';
+import ListHotels from '../Components/Places/ListHotels';
 
 // Sample list of districts
 const districts = [
@@ -201,7 +202,7 @@ const TouristAttractions = () => {
         </FormContainerInner>
       </FormContainer>
       <ListContainer>
-        <ListPlaces apiUrl={'hotels'} flag={flag} />
+        <ListHotels api={'hotels'} flag={flag} />
       </ListContainer>
     </MainContainer>
   );

@@ -6,7 +6,7 @@ import CircularLoading from '../CircularLoading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-const ListPlaces = ({ api, flag }) => {
+const ListHotels = ({ api, flag }) => {
   console.log(api, flag, "listPlaces");
   const [list, setList] = useState([]);
   const [isLoading, setIsLoading] = useState(false); // State for loading status
@@ -68,7 +68,7 @@ const ListPlaces = ({ api, flag }) => {
                 <p>Price: {item.price}</p> {/* Place price */}
               </InsideContainer3>
               <InsideContainer4 onClick={() => handleDelete(item.id)}>
-                <FontAwesomeIcon icon={faTrash} />
+              <FontAwesomeIcon icon={faTrash} />
                 {/* <ImageView2 src={delete_icon} alt="Delete" /> Delete button */}
               </InsideContainer4>
             </InsideContainer2>
@@ -79,7 +79,7 @@ const ListPlaces = ({ api, flag }) => {
   );
 };
 
-export default ListPlaces;
+export default ListHotels;
 
 // Styled-components for layout and styling
 const MainContainer = styled.div`

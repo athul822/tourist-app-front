@@ -112,7 +112,7 @@ const TouristAtractions = () => {
             }}
           />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
-            <p style={{ color: secondary }}>District</p>
+            <p style={{ color: secondary }}>District*</p>
             <DistrictDropdown
               districts={disticts}
               onChange={handleDistrictChange}
@@ -167,6 +167,14 @@ const TouristAtractions = () => {
               setData({ ...data, [name]: value });
             }}
           />
+           <Entry
+              data={data}
+              title="Price*"
+              name="price"
+              setData={(name, value) => {
+                setData({ ...data, [name]: value });
+              }}
+            />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '.4em' }}>
             <p style={{ color: secondary, marginBottom: '1em' }}>Pick Place Image*</p>
             <ImagePicker
@@ -175,14 +183,7 @@ const TouristAtractions = () => {
                 setBase64Image(base64String);
               }}
             />
-            <Entry
-              data={data}
-              title="Price*"
-              name="price"
-              setData={(name, value) => {
-                setData({ ...data, [name]: value });
-              }}
-            />
+           
           </div>
           <div style={{ width: '100%', marginTop: '1em' }}>
             <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>

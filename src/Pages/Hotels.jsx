@@ -35,6 +35,7 @@ const validateForm = (data, selectedDistrict, selectedPlace, base64Image) => {
     { field: data.address, fieldName: 'Address' },
     { field: data.contactNumber, fieldName: 'Contact Number' },
     { field: data.price, fieldName: 'Price' },
+    { field: data.totalRooms, fieldName: 'Total Rooms' },
   ];
 
   // Check if required fields are empty or undefined
@@ -118,6 +119,7 @@ const TouristAttractions = () => {
       placeId: selectedPlace,
       image: base64Image,
     };
+    submitData.availableRooms = submitData.totalRooms
     setIsLoading(true);
     post('/hotels/register', submitData)
       .then((res) => {
@@ -188,6 +190,13 @@ const TouristAttractions = () => {
             data={data}
             title="Price*"
             name="price"
+            setData={(name, value) => setData({ ...data, [name]: value })}
+          />
+       
+       <Entry
+            data={data}
+            title="Total No of Rooms*"
+            name="totalRooms"
             setData={(name, value) => setData({ ...data, [name]: value })}
           />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '.4em' }}>

@@ -6,6 +6,7 @@ import ListPlaces from '../Components/Places/ListPlaces';
 import ImagePicker from '../Components/ImagePicker';
 import { post } from '../actions/api';
 import { secondary } from '../utils/theme';
+import ListHotels from '../Components/Places/ListHotels';
 
 const disticts = [
   { "name": "Thiruvananthapuram", "id": 0 },
@@ -191,7 +192,7 @@ const TouristAtractions = () => {
         </FormContainerInner>
       </FormContainer>
       <ListContainer>
-        <ListPlaces api={'places'} flag={flag} />
+        <ListHotels api={'places'} flag={flag} />
       </ListContainer>
     </MainContainer>
   );
@@ -242,7 +243,7 @@ const ListContainer = styled.div`
   flex: 1;
   height: 92%;
   box-shadow: 0 0 5px ${secondary};
-  padding: 1em;
+  // padding: 1em;
   border-radius: 10px;
   overflow-y: scroll;
   background-color: white;

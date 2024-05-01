@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Entry from '../Components/InputBox';
-import ListPlaces from '../Components/Places/ListPlaces';
 import ImagePicker from '../Components/ImagePicker';
 import { post } from '../actions/api';
 import PlacesDropDown from '../Components/PlacesDropDown';
@@ -84,11 +83,12 @@ const TouristAttractions = () => {
     setSelectedDistrict(e.target.value);
   };
 
-  const reset = () => {
+  const reset = async () => {
     setData({});
     setBase64Image(null);
     setSelectedDistrict(null);
     setError(null); // Reset error on form reset
+    return
   };
 
   useEffect(() => {
@@ -106,9 +106,11 @@ const TouristAttractions = () => {
   }, [selectedDistrict]);
 
   const handleSubmit = () => {
+    setIsLoading(true);
     const validationError = validateForm(data, selectedDistrict, selectedPlace, base64Image);
 
     if (validationError) {
+      setIsLoading(false);
       setError(validationError);
       return; // Don't proceed with form submission
     }
@@ -120,12 +122,12 @@ const TouristAttractions = () => {
       image: base64Image,
     };
     submitData.availableRooms = submitData.totalRooms
-    setIsLoading(true);
+   
     post('/hotels/register', submitData)
-      .then((res) => {
+      .then(async (res) => {
         console.log(res);
+        await reset(); // Reset form after successful submission
         setFlag(!flag);
-        reset(); // Reset form after successful submission
         setIsLoading(false);
       })
       .catch((err) => {
@@ -246,7 +248,7 @@ const ListContainer = styled.div`
   flex: 1;
   background-color: white;
   box-shadow: 0 0 5px ${secondary};
-  padding: 1em;
+  // padding: 1em;
   border-radius: 10px;
   overflow-y: auto;
 `;

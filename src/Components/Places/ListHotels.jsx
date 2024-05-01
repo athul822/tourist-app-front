@@ -6,17 +6,37 @@ import CircularLoading from '../CircularLoading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { secondary } from '../../utils/theme';
-
+import DistrictDropdown from '../DistictDopDown';
+const districts = [
+  { name: 'Thiruvananthapuram', id: 0 },
+  { name: 'Kollam', id: 1 },
+  { name: 'Pathanamthitta', id: 2 },
+  { name: 'Alappuzha', id: 3 },
+  { name: 'Kottayam', id: 4 },
+  { name: 'Idukki', id: 5 },
+  { name: 'Ernakulam', id: 6 },
+  { name: 'Thrissur', id: 7 },
+  { name: 'Palakkad', id: 8 },
+  { name: 'Malappuram', id: 9 },
+  { name: 'Kozhikode', id: 10 },
+  { name: 'Wayanad', id: 11 },
+  { name: 'Kannur', id: 12 },
+  { name: 'Kasaragod', id: 13 },
+];
 const ListHotels = ({ api, flag }) => {
   console.log(api, flag, "listPlaces");
   const [list, setList] = useState([]);
-  const [isLoading, setIsLoading] = useState(false); // State for loading status
+  const [selectedDistrict, setSelectedDistrict] = useState(null);
 
+  const [searchResult, setSearchResult] = useState([]);
+  const [isLoading, setIsLoading] = useState(false); // State for loading status
+  const [search, setSearch] = useState("");
   const getList = () => {
     setIsLoading(true); // Set loading to true
     post(`/${api}/list`, { id: "all" })
       .then((res) => {
         setList(res.data); // Update list with fetched data
+        setSearchResult(res.data)
       })
       .catch((err) => {
         console.error(err); // Handle error
@@ -34,6 +54,28 @@ const ListHotels = ({ api, flag }) => {
     getList(); // Fetch on component mount
   }, []);
 
+  useEffect(() => {
+    console.log(selectedDistrict, "selectedDistrict");
+    const filterdData = searchResult.filter((item) => {
+      console.log(item, "itemmedicationfileter");
+      return item.districtId == selectedDistrict
+    })
+    setList(filterdData)
+  }, [selectedDistrict]);
+
+  useEffect(() => {
+    console.log(search,list, "keywordinsidemedical");
+    const filterdData = searchResult.filter((item) => {
+      console.log(item, "itemmedicationfileter");
+      return item.name.toLowerCase().includes(search.toLowerCase())
+    })
+    console.log(filterdData,"filterdData");
+    setList(filterdData)
+  }, [search])
+
+  useEffect(() => {
+    console.log(searchResult, "searchResult");
+  }, [searchResult]);
   const handleDelete = (id) => {
     setIsLoading(true); // Set loading when deleting
     post(`/${api}/delete`, { id })
@@ -48,13 +90,24 @@ const ListHotels = ({ api, flag }) => {
         setIsLoading(false); // Reset loading
       });
   };
+  const handleDistrictChange = (e) => {
+    setSelectedDistrict(e.target.value);
+  };
 
   return (
     <div>
-     
+      <SearchBarContainer>
+        <SearchBar placeholder='Search' onChange={(e) => setSearch(e.target.value)} />
+        <DistrictDropdown
+                districts={districts}
+                onChange={handleDistrictChange}
+                selectedDistrict={selectedDistrict}
+              />
+      </SearchBarContainer>
 
       <MainContainer>
-      {isLoading && <CircularLoading />} {/* Show loading spinner */}
+
+        {isLoading && <CircularLoading />} {/* Show loading spinner */}
         {list.map((item) => (
           <CadContainer key={item.id}>
             <InsideContainer1>
@@ -69,7 +122,7 @@ const ListHotels = ({ api, flag }) => {
                 <p>Price: {item.price}</p> {/* Place price */}
               </InsideContainer3>
               <InsideContainer4 onClick={() => handleDelete(item.id)}>
-              <FontAwesomeIcon icon={faTrash} />
+                <FontAwesomeIcon icon={faTrash} />
                 {/* <ImageView2 src={delete_icon} alt="Delete" /> Delete button */}
               </InsideContainer4>
             </InsideContainer2>
@@ -87,8 +140,27 @@ const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.8em;
-  position: relative;
+  // position: relative;
+  padding: 1em;
 `;
+const SearchBarContainer = styled.div`
+height: 50px;
+// width: 100%;
+background-color: ${secondary};
+display: flex;
+align-items: center;
+padding: .5em 1em;
+justify-content: space-between;
+`
+const SearchBar = styled.input`
+height: 32px;
+width: 200px;
+background-color: ${secondary};
+border: white 1px solid;
+border-radius: 10px;
+color: white;
+`
+
 
 const Description = styled.div`
   width: 200px;

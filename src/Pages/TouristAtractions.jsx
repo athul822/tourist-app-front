@@ -44,6 +44,8 @@ const TouristAtractions = () => {
   };
 
   const validateForm = () => {
+    const latRegex = /^-?\d+(\.\d+)?$/; // Regex for numeric values (including negatives and decimals)
+    // const longRegex = /^-?\d+(\.\d+)?$/;
     const { name, description, address, lat, lon, price } = data;
     const requiredFields = [
       { field: name, fieldName: 'Place Name' },
@@ -61,6 +63,17 @@ const TouristAtractions = () => {
         return `Field "${required.fieldName}" is required.`;
       }
     }
+
+    console.log(lat,typeof(lat),"typecheck");
+    if (!latRegex.test(lat)) {
+      console.log(lat,typeof(lat),"typecheck");
+      return 'Invalid latitude';
+    }
+
+    if (!latRegex.test(lon)) {
+      return 'Invalid longitude';
+    }
+
 
     if (!selectedDistrict) {
       return 'Please select a district.';
